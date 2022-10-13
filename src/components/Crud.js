@@ -6,13 +6,17 @@ import { collection, onSnapshot, addDoc, doc, deleteDoc} from 'firebase/firestor
 import Form from './Form';
 import List from './List';
 
+const initialData = {
+  nombre: '',
+  apellido: '',
+  edad: '',
+  carrera: '',
+  semestre: ''
+}
 
 const Crud = props => {
   const [listaEstudiantes, setListaEstudiantes] = useState([])
-  const [data, setData] = useState({
-    nombre: '',
-    carrera: ''
-  })
+  const [data, setData] = useState(initialData)
 
   useEffect(() => {
     const get = async () => {
@@ -34,16 +38,16 @@ const Crud = props => {
 
     try {
       
-      const datos = await addDoc(collection(db,'estudiantes'),{
+      await addDoc(collection(db,'estudiantes'),{
                 
         nombre: data.nombre,
-        carrera: data.carrera
+        apellido: data.apellido,
+        edad: data.edad,
+        carrera: data.carrera,
+        semestre: data.semestre
     })
 
-    setData({
-      nombre: '',
-      carrera: '',
-    })
+    setData(initialData)
 
     e.target.reset()
 
