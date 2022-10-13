@@ -1,62 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { db } from "./../firebase";
-import { collection, onSnapshot, addDoc, doc, deleteDoc} from 'firebase/firestore';
+import React from "react";
 
-const Form = ({setListaEstudiantes, listaEstudiantes}) => {
-
-
-  const [data, setData] = useState({
-    nombre: '',
-    carrera: ''
-  })
-
-  useEffect(() => {
-    const get = async () => {
-      try {
-        
-        await onSnapshot(collection(db, "estudiantes"), (querySnapshot) => {    
-          setListaEstudiantes(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-
-    get()
-  }, [])
-
+const Form = ({ data, setData, create }) => {
   const handleChange = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value
-    })
-  } 
-
-
-
-  const create = async (e) => {
-    e.preventDefault()
-
-    try {
-      
-      const datos = await addDoc(collection(db,'estudiantes'),{
-                
-        nombre: data.nombre,
-        carrera: data.carrera
-    })
-
-    setData({
-      nombre: '',
-      carrera: '',
-    })
-
-    e.target.reset()
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <>
@@ -79,7 +29,9 @@ const Form = ({setListaEstudiantes, listaEstudiantes}) => {
             value={data.carrera}
             onChange={handleChange}
           />
-          <button type="submit" className="btn btn-primary btn-large m-1">Enviar</button>
+          <button type="submit" className="btn btn-primary btn-large m-1">
+            Enviar
+          </button>
         </form>
       </div>
     </>
