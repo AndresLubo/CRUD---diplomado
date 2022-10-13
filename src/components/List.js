@@ -21,7 +21,7 @@ const List = ({ listaEstudiantes, eliminar}) => {
                   aria-expanded="false"
                   aria-controls={`collapse${index}`}
                 >
-                  {estudiante.nombre}
+                  {`${estudiante.nombre} ${estudiante.apellido}`}
                 </button>
               </h2>
               <div
@@ -31,7 +31,10 @@ const List = ({ listaEstudiantes, eliminar}) => {
                 data-bs-parent="#accordionExample"
               >
                 <div className="accordion-body">
-                  <p>Contenido</p>
+                  <p><b>Nombre: </b>{estudiante.nombre} {estudiante.apellido}</p>
+                  <p><b>Edad: </b>{estudiante.edad} años</p>
+                  <p><b>Carrera: </b>{estudiante.carrera}</p>
+                  <p><b>Semestre en curso: </b>{estudiante.semestre}</p>
                   <button className="btn btn-danger" onClick={() => eliminar(estudiante.id)}>Eliminar</button>
                 </div>
               </div>
