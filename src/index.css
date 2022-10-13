@@ -1,0 +1,16 @@
+body{
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+*,
+*::after,
+*:before{
+  box-sizing: inherit;
+}
+
+
+hr{
+  width: 70%;
+  margin: 2rem auto;
+}
